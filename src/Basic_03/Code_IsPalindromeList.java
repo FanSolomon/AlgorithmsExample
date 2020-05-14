@@ -68,29 +68,24 @@ public class Code_IsPalindromeList {
         }
         Node slower = head;
         Node faster = head;
-        Node tmp;
         Node tmpPre;
         Node tmpNext;
-        Node end;
-        Node slowerPre = head;
         while (faster != null) {
-            slowerPre = slower;
-            slower = slower.next;
-            if (faster.next == null) {
-                slowerPre = slower;
-            }
+            slower = slower.next;   //奇数个时 slower来到中点。偶数个时，来到后一个中点
             faster = faster.next == null ? null : faster.next.next;
         }
-        tmp = slower.next;
         tmpPre = slower;
-        slower.next = null;
-        while (tmp != null) {
-            tmpNext = tmp.next;
-            tmp.next =tmpPre;
-            tmpPre = tmp;
-            tmp = tmpNext;
+        slower = slower.next;   //用slower来表示当前node位置，即tmp
+        tmpPre.next = null;
+        //逆向后半段链表的next指向
+        while (slower != null) {
+            tmpNext = slower.next;
+            slower.next =tmpPre;
+            tmpPre = slower;
+            slower = tmpNext;
         }
-        end = tmpPre;
+        faster = tmpPre;    //用faster来记录end位置
+        //判断是否为回文链表
         while (tmpPre != null && head != null) {
             if (tmpPre.value != head.value) {
                 isPalindrome = false;
@@ -98,13 +93,15 @@ public class Code_IsPalindromeList {
             tmpPre = tmpPre.next;
             head = head.next;
         }
-        tmp = end.next;
-        tmpPre = end;
-        while (tmp != slowerPre && tmp != null && tmp.next != null) {
-            tmpNext = tmp.next;
-            tmp.next = tmpPre;
-            tmpPre = tmp;
-            tmp = tmpNext;
+        slower = faster.next;
+        tmpPre = faster;
+        faster.next = null;
+        //还原该单向链表
+        while (slower != null) {
+            tmpNext = slower.next;
+            slower.next = tmpPre;
+            tmpPre = slower;
+            slower = tmpNext;
         }
         return isPalindrome;
     }
