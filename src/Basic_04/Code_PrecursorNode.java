@@ -17,16 +17,16 @@ public class Code_PrecursorNode {
 
     public static class Node {
         public int value;
-        public Code_SuccessorNode.Node left;
-        public Code_SuccessorNode.Node right;
-        public Code_SuccessorNode.Node parent;
+        public Node left;
+        public Node right;
+        public Node parent;
 
         public Node(int data) {
             this.value = data;
         }
     }
 
-    public static Code_SuccessorNode.Node getPrecursorNode(Code_SuccessorNode.Node node) {
+    public static Node getPrecursorNode(Node node) {
         if (node == null) {
             return null;
         }
@@ -44,28 +44,28 @@ public class Code_PrecursorNode {
     }
 
     public static void main(String[] args) {
-        Code_SuccessorNode.Node head = new Code_SuccessorNode.Node(6);
+        Node head = new Node(6);
         head.parent = null;
-        head.left = new Code_SuccessorNode.Node(3);
+        head.left = new Node(3);
         head.left.parent = head;
-        head.left.left = new Code_SuccessorNode.Node(1);
+        head.left.left = new Node(1);
         head.left.left.parent = head.left;
-        head.left.left.right = new Code_SuccessorNode.Node(2);
+        head.left.left.right = new Node(2);
         head.left.left.right.parent = head.left.left;
-        head.left.right = new Code_SuccessorNode.Node(4);
+        head.left.right = new Node(4);
         head.left.right.parent = head.left;
-        head.left.right.right = new Code_SuccessorNode.Node(5);
+        head.left.right.right = new Node(5);
         head.left.right.right.parent = head.left.right;
-        head.right = new Code_SuccessorNode.Node(9);
+        head.right = new Node(9);
         head.right.parent = head;
-        head.right.left = new Code_SuccessorNode.Node(8);
+        head.right.left = new Node(8);
         head.right.left.parent = head.right;
-        head.right.left.left = new Code_SuccessorNode.Node(7);
+        head.right.left.left = new Node(7);
         head.right.left.left.parent = head.right.left;
-        head.right.right = new Code_SuccessorNode.Node(10);
+        head.right.right = new Node(10);
         head.right.right.parent = head.right;
 
-        Code_SuccessorNode.Node test = head.left.left;
+        Node test = head.left.left;
         // 1's pre is null
         System.out.println(test.value + " pre: " + getPrecursorNode(test));
         test = head.left.left.right;
